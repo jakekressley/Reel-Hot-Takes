@@ -1,6 +1,7 @@
 import './App.css'
 import {useState} from 'react'
 import axios from 'axios'
+import LoadingBar from './components/LoadingBar'
 
 
 function App() {
@@ -8,21 +9,32 @@ function App() {
   const [username, setUsername] = useState('')
   const [progress, setProgress] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+  const [resultsShown, setResultsShown] = useState(false);
 
 
   function getMovies() {
-    setProgress(3)
     setIsLoading(true)
+    setIsClicked(true)
+    const intervalId = setInterval(() => {
+      setProgress((prevProgress) => prevProgress < 80 ? prevProgress + 1 : prevProgress);
+    }, 200);
+
     axios.get(`https://cinescout.onrender.com/user/${username}`)
     .then(response => {
       setMovies(response.data);
-      setProgress(100)
+      clearInterval(intervalId);
+      setProgress(0)
       setIsLoading(false)
+      setIsClicked(false)
+      setResultsShown(true)
     })
     .catch(error => {
       console.error(error);
+      clearInterval(intervalId);
       setProgress(0)
       setIsLoading(false)
+      setIsClicked(false)
     });
   }
 
@@ -59,50 +71,65 @@ function App() {
   }
 
   return (
-    <div className='p-12 flex flex-col items-center'>
-      <div className="flex">
-        <input type="text" className="border border-black" placeholder='Letterboxd Username' onChange={e => setUsername(e.target.value)}/>
-        <button onClick={getMovies} className="--fire-gradient rounded-lg px-4 py-2 text-white">Get Hot Takes</button>
-      </div>
-      <p>{progress}%</p>
-      {{isLoading} && <p>It is loading</p>}
-      <p>This site uses the methodology that blah blah blah. Hotness ratings are calculated by taking a user's letterboxd rating and comparing it against the average user score on The Movie Database for more accurate results</p>
-      <div className="flex flex-col gap-6 p-20 overflow-auto border border-pink-500 h-[500px]">
-        {/* Render each movie */}
-        {movies.map((movie: { title: string, user_rating: number, average: number, votes: number, hotness: number, poster: number, year: number, overview: string, genres: Array<string> }) => (
-          <div key={movie.title} className="flex border border-black rounded-3xl gap-6 p-6 h-[250px]">
-            <div className="flex items-center gap-6">
-              <p className={`${getHotnessColor(movie.hotness)} text-5xl font-bold underline`}>{Math.round(movie.hotness)}</p>
-              <img src={`https://image.tmdb.org/t/p/original/${movie.poster}`} alt={`${movie.title} poster`} className="w-auto h-full"/>
+    <div className='py-12 px-52 flex flex-col items-center h-screen'>
+      <p>Enter a Letterboxd username to see that user's hottest takes!</p>
+      <div className="flex flex-col">
+        <div className="flex p-8 gap-4">
+          <input type="text" className="border border-black px-3 rounded-lg" placeholder='Letterboxd Username' onChange={e => setUsername(e.target.value)}/>
+          <button onClick={() => !isClicked && getMovies()} className="--fire-gradient rounded-lg px-4 py-2 text-white font-bold">Get Hot Takes</button>
+        </div>
+        <div>
+          {isLoading && (
+            <div>
+              <LoadingBar progress={progress} />
             </div>
-            <div className='flex w-full'>
-              <div className="flex flex-col w-full px-12 justify-between">
-                <div className="flex justify-between items-center">
-                  <a href={`https://letterboxd.com/film/${formatTitle(movie.title)}`}>
-                    <h2 className='text-xl'><b>{movie.title}</b></h2>
-                  </a>
-                  <p><i>{movie.year}</i></p>
+          )}
+        </div>
+      </div>
+      <p className='pt-4 pb-6 px-36 text-center text-md'>Hotness ratings are calculated by taking a user's letterboxd rating and comparing it against the average user score on <a href="https://www.themoviedb.org/?language=en-US" className="text-red-500">The Movie Database</a> for more accurate results. Movies are slightly weighted by popularity, i.e. a large rating difference of a popular movie will have a higher hotness rating than the same rating difference on a lesser-known movie.</p>
+      {resultsShown && (
+        <div className={`flex flex-col gap-6 py-8 px-12 overflow-auto rounded-md h-[400px] border border-gray-300`}>
+          {movies.map((movie: { title: string, user_rating: number, average: number, votes: number, hotness: number, poster: number, year: number, overview: string, genres: Array<string> }) => (
+            <div key={movie.title} className="flex border border-black rounded-3xl gap-6 p-6 h-[216px] text-sm">
+              <div className="flex items-center gap-6">
+                <div className="flex flex-col">
+                  <p className={`${getHotnessColor(movie.hotness)} mb-4 font-bold`}>Hotness</p>
+                  <p className={`${getHotnessColor(movie.hotness)} text-5xl font-bold underline`}>{Math.round(movie.hotness)}</p>
                 </div>
-                <div className="h-[60%] overflow-y-auto flex items-center">
-                  <p>{movie.overview}</p>
-                </div>
-                <div className="flex justify-between">
-                  <div>{movie.genres.map((genre: string) => (
-                    <span key={genre} className="text-sm --fire-gradient rounded-full px-4 py-2 mx-1 text-white font-bold">{genre}</span>
-                    ))}
+                <img src={`https://image.tmdb.org/t/p/original/${movie.poster}`} alt={`${movie.title} poster`} className="w-auto h-full"/>
+              </div>
+              <div className='flex w-full'>
+                <div className="flex flex-col w-full px-12 justify-between">
+                  <div className="flex justify-between items-center">
+                    <a href={`https://letterboxd.com/film/${formatTitle(movie.title)}`}>
+                      <h2 className='text-xl'><b>{movie.title}</b></h2>
+                    </a>
+                    <p><i>{movie.year}</i></p>
                   </div>
-                  <div className="flex gap-3">
-                    <p>User Rating: {movie.user_rating}</p>
-                    <p>Average: {movie.average.toFixed(1)}</p>
+                  <div className="h-[60%] overflow-y-auto flex items-center mb-3 --overview-text">
+                    <p>{movie.overview}</p>
+                  </div>
+                  <div className="flex justify-between">
+                    <div>{movie.genres.slice(0,3).map((genre: string) => (
+                      <span key={genre} className="text-sm --fire-gradient rounded-full px-4 py-2 mx-1 text-white font-bold">{genre}</span>
+                      ))}
+                    </div>
+                    <div className="flex gap-3">
+                      <p>User Rating: {movie.user_rating}</p>
+                      <p>Average: {movie.average.toFixed(1)}</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
-      <footer>
-        Developed by Jake Kressley
+          ))}
+        </div>
+      )}
+      <footer className="mt-8 flex items-center gap-2 absolute bottom-8">
+        Developed by Jake
+        <a href="https://github.com/jakekressley/Flick-Flares" target='blank'>
+          <img src="../public/github-mark.png" alt="github logo" className="w-[24px] h-auto"/>
+        </a>
       </footer>
     </div>
   );
