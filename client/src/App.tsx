@@ -88,7 +88,7 @@ function App() {
       </div>
       <p className='pt-4 pb-6 px-36 text-center text-md'>Hotness ratings are calculated by taking a user's letterboxd rating and comparing it against the average user score on <a href="https://www.themoviedb.org/?language=en-US" className="text-red-500">The Movie Database</a> for more accurate results. Movies are slightly weighted by popularity, i.e. a large rating difference of a popular movie will have a higher hotness rating than the same rating difference on a lesser-known movie.</p>
       {resultsShown && (
-        <div className={`flex flex-col gap-6 py-8 px-12 overflow-auto rounded-md h-[400px] border border-gray-300`}>
+        <div className={`flex flex-col gap-6 py-8 px-12 overflow-auto rounded-xl h-[400px] border border-gray-300`}>
           {movies.map((movie: { title: string, user_rating: number, average: number, votes: number, hotness: number, poster: number, year: number, overview: string, genres: Array<string> }) => (
             <div key={movie.title} className="flex border border-black rounded-3xl gap-6 p-6 h-[216px] text-sm">
               <div className="flex items-center gap-6">
@@ -125,10 +125,10 @@ function App() {
           ))}
         </div>
       )}
-      <footer className="mt-8 flex items-center gap-2 absolute bottom-8">
+      <footer className="mt-8 flex items-center gap-2 absolute bottom-6">
         Developed by Jake
         <a href="https://github.com/jakekressley/Flick-Flares" target='blank'>
-          <img src="../public/github-mark.png" alt="github logo" className="w-[24px] h-auto"/>
+          <img src="/github-mark.png" alt="github logo" className="w-[24px] h-auto"/>
         </a>
       </footer>
     </div>
