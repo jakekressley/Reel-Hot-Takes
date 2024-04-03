@@ -79,7 +79,7 @@ function App() {
       <span className="text-6xl font-bold --font-gradient">Flick Flares</span>
       <p className='mt-4'>Enter a Letterboxd username to see that user's hottest takes!</p>
       <div className="flex flex-col">
-        <div className="flex px-8 pt-8 pb-4 gap-4">
+        <div className="flex px-8 pt-8 pb-4 gap-4 ">
           <input type="text" className="border border-black px-3 rounded-lg" placeholder='Letterboxd Username' onChange={e => setUsername(e.target.value)}/>
           <button onClick={() => !isClicked && getMovies()} className="--fire-gradient rounded-lg px-4 py-2 text-white font-bold">Get Hot Takes</button>
         </div>
