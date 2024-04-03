@@ -75,9 +75,9 @@ function App() {
   }
 
   return (
-    <div className='pt-2 pb-4 px-6 xl:pt-8 xl:pb-12 xl:px-52 flex flex-col items-center h-screen'>
+    <div className='pt-10 px-4 xl:pt-8 xl:pb-12 xl:px-52 flex flex-col items-center h-screen'>
       <span className="text-4xl xl:text-6xl font-bold --font-gradient">Flick Flares</span>
-      <p className='text-sm xl:text-lg mt-4 text-center'>Enter a Letterboxd username to see that user's hottest takes!</p>
+      <p className='text-sm xl:text-lg mt-4 text-center px-12'>Enter a Letterboxd username to see that user's hottest takes!</p>
       <div className="flex flex-col">
         <div className="flex px-8 pt-8 pb-4 gap-2 xl:gap-4 flex-col xl:flex-row">
           <input type="text" className="border border-black px-3 rounded-lg py-2" placeholder='Letterboxd Username' onChange={e => setUsername(e.target.value)}/>
@@ -98,33 +98,33 @@ function App() {
       </div>
       )}
       {resultsShown && (
-        <div className={`flex flex-col gap-6 py-8 px-12 overflow-auto rounded-xl h-[240px] xl:h-[400px] border border-gray-300`}>
+        <div className={`flex flex-col gap-6 py-8 px-4 xl:px-12 xl:overflow-auto rounded-xl h-auto xl:h-[400px] border border-gray-300`}>
           {movies.map((movie: { title: string, user_rating: number, average: number, votes: number, hotness: number, poster: number, year: number, overview: string, genres: Array<string> }) => (
-            <div key={movie.title} className="flex flex-col xl:flex-row border border-black rounded-3xl gap-6 p-6 xl:h-[216px] text-sm">
-              <div className="flex items-center gap-6">
-                <div className="flex flex-col">
-                  <p className={`${getHotnessColor(movie.hotness)} mb-4 font-bold hidden xl:visible`}>Hotness</p>
-                  <p className={`${getHotnessColor(movie.hotness)} text-xl xl:text-5xl font-bold underline`}>{Math.round(movie.hotness)}</p>
+            <div key={movie.title} className="flex flex-col xl:flex-row border border-black rounded-3xl gap-3 xl:gap-6 p-6 xl:h-[216px] text-sm">
+              <div className="flex flex-col xl:flex-row items-center w-full xl:w-auto gap-6 justify-center xl:justify-normal">
+                <div className="flex flex-row xl:flex-col items-baseline xl:items-center gap-4 xl:gap-0">
+                  <p className={`${getHotnessColor(movie.hotness)} xl:mb-4 font-bold text-3xl xl:text-2xl`}>Hotness</p>
+                  <p className={`${getHotnessColor(movie.hotness)} text-3xl xl:text-5xl font-bold`}>{Math.round(movie.hotness)}</p>
                 </div>
-                <img src={`https://image.tmdb.org/t/p/original/${movie.poster}`} alt={`${movie.title} poster`} className="hidden xl:block w-auto h-[36px] xl:h-full"/>
+                <img src={`https://image.tmdb.org/t/p/original/${movie.poster}`} alt={`${movie.title} poster`} className="xl:block w-auto h-[100px] xl:h-full"/>
               </div>
               <div className='flex w-full'>
-                <div className="flex flex-col w-full px-12 justify-between">
+                <div className="flex flex-col w-full px-6 xl:px-12 justify-between">
                   <div className="flex justify-between items-center">
                     <a href={`https://letterboxd.com/film/${formatTitle(movie.title)}`} target='blank'>
-                      <h2 className='text-xl'><b>{movie.title}</b></h2>
+                      <h2 className='text-md xl:text-xl'><b>{movie.title}</b></h2>
                     </a>
                     <p><i>{movie.year}</i></p>
                   </div>
-                  <div className="h-[60%] overflow-y-auto flex items-center mb-3 --overview-text">
+                  <div className="h-[60%] xl:overflow-y-auto flex items-center mb-3 --overview-text">
                     <p>{movie.overview}</p>
                   </div>
                   <div className="flex flex-col xl:flex-row justify-between">
-                    <div className="flex flex-wrap">{movie.genres.slice(0,3).map((genre: string) => (
-                      <span key={genre} className="text-sm --fire-gradient rounded-full px-2 py-1 xl:px-4 xl:py-2 mx-1 text-white font-bold">{genre}</span>
+                    <div className="flex flex-wrap gap-y-1">{movie.genres.slice(0,3).map((genre: string) => (
+                      <span key={genre} className="text-xs --fire-gradient rounded-full px-2 py-1 xl:px-4 xl:py-2 mx-1 text-white font-bold">{genre}</span>
                       ))}
                     </div>
-                    <div className="flex gap-3">
+                    <div className="flex gap-3 mt-2">
                       <p className="text-sm">User Rating: {movie.user_rating}</p>
                       <p className="text-sm">Average: {movie.average.toFixed(1)}</p>
                     </div>
@@ -135,7 +135,7 @@ function App() {
           ))}
         </div>
       )}
-      <footer className="xl:mt-8 flex items-center gap-2 absolute bottom-4">
+      <footer className="xl:mt-8 flex items-center gap-2 xl:absolute xl:bottom-4">
         Developed by Jake
         <a href="https://github.com/jakekressley/Flick-Flares" target='blank'>
           <img src="/github-mark.png" alt="github logo" className="w-[24px] h-auto"/>
