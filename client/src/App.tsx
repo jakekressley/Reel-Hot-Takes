@@ -1,5 +1,6 @@
 import './App.css'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+//import { useEffect } from 'react'
 import axios from 'axios'
 import LoadingBar from './components/LoadingBar'
 import { useWindowSize } from "@uidotdev/usehooks";
@@ -14,17 +15,17 @@ function App() {
   const [isClicked, setIsClicked] = useState(false);
   const [resultsShown, setResultsShown] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  //const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   const screenWidth = useWindowSize().width;
 
-  useEffect(() => {
-    if (window.innerWidth < 1280) {
-      setIsSmallScreen(true)
-    } else {
-      setIsSmallScreen(false)
-    }
-  })
+  // useEffect(() => {
+  //   if (window.innerWidth < 1280) {
+  //     setIsSmallScreen(true)
+  //   } else {
+  //     setIsSmallScreen(false)
+  //   }
+  // })
 
 
   function getMovies() {
