@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-url = "https://api.themoviedb.org/3/movie/70160"
+url = "https://api.themoviedb.org/3/movie/725201"
 genre_url = "https://api.themoviedb.org/3/genre/movie/list?language=en"
 
 headers = {
@@ -21,7 +21,7 @@ for genre in genres_list.json()['genres']:
 print(genres)
 
 movie = requests.get(url, headers=headers)
-print(movie.json())
+#print(movie.json())
 print(movie.json()['overview'])
 genre_json = movie.json()['genres']
 genres = []
