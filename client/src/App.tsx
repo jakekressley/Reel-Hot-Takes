@@ -11,11 +11,13 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const [resultsShown, setResultsShown] = useState(false);
+  const [isError, setIsError] = useState(false);
 
 
   function getMovies() {
     setIsLoading(true)
     setIsClicked(true)
+    setIsError(false)
     const intervalId = setInterval(() => {
       setProgress((prevProgress) => prevProgress < 80 ? prevProgress + 1 : prevProgress);
     }, 200);
@@ -31,10 +33,12 @@ function App() {
     })
     .catch(error => {
       console.error(error);
+      console.log("error caught")
       clearInterval(intervalId);
       setProgress(0)
       setIsLoading(false)
       setIsClicked(false)
+      setIsError(true)
     });
   }
 
@@ -71,10 +75,11 @@ function App() {
   }
 
   return (
-    <div className='py-12 px-52 flex flex-col items-center h-screen'>
-      <p>Enter a Letterboxd username to see that user's hottest takes!</p>
+    <div className='pt-8 pb-12 px-52 flex flex-col items-center h-screen'>
+      <span className="text-6xl font-bold --font-gradient">Flick Flares</span>
+      <p className='mt-4'>Enter a Letterboxd username to see that user's hottest takes!</p>
       <div className="flex flex-col">
-        <div className="flex p-8 gap-4">
+        <div className="flex px-8 pt-8 pb-4 gap-4">
           <input type="text" className="border border-black px-3 rounded-lg" placeholder='Letterboxd Username' onChange={e => setUsername(e.target.value)}/>
           <button onClick={() => !isClicked && getMovies()} className="--fire-gradient rounded-lg px-4 py-2 text-white font-bold">Get Hot Takes</button>
         </div>
@@ -86,7 +91,12 @@ function App() {
           )}
         </div>
       </div>
-      <p className='pt-4 pb-6 px-36 text-center text-md'>Hotness ratings are calculated by taking a user's letterboxd rating and comparing it against the average user score on <a href="https://www.themoviedb.org/?language=en-US" className="text-red-500">The Movie Database</a> for more accurate results. Movies are slightly weighted by popularity, i.e. a large rating difference of a popular movie will have a higher hotness rating than the same rating difference on a lesser-known movie.</p>
+      <p className='pt-2 pb-6 px-36 text-center text-md'>Hotness ratings are calculated by taking a user's letterboxd rating and comparing it against the average user score on <a href="https://www.themoviedb.org/?language=en-US" className="text-red-500">The Movie Database</a> for more accurate results. Movies are slightly weighted by popularity, i.e. a large rating difference of a popular movie will have a higher hotness rating than the same rating difference on a lesser-known movie.</p>
+    {isError && (
+      <div className="flex items-center justify-center h-full mb-10">
+        <p className="text-2xl font-bold">User not found. Please enter a valid Letterboxd user.</p>
+      </div>
+      )}
       {resultsShown && (
         <div className={`flex flex-col gap-6 py-8 px-12 overflow-auto rounded-xl h-[400px] border border-gray-300`}>
           {movies.map((movie: { title: string, user_rating: number, average: number, votes: number, hotness: number, poster: number, year: number, overview: string, genres: Array<string> }) => (
@@ -125,7 +135,7 @@ function App() {
           ))}
         </div>
       )}
-      <footer className="mt-8 flex items-center gap-2 absolute bottom-6">
+      <footer className="mt-8 flex items-center gap-2 absolute bottom-4">
         Developed by Jake
         <a href="https://github.com/jakekressley/Flick-Flares" target='blank'>
           <img src="/github-mark.png" alt="github logo" className="w-[24px] h-auto"/>
