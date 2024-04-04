@@ -90,7 +90,7 @@ function App() {
 
   return (
     <div className='pt-10 px-4 xl:pt-8 xl:pb-12 xl:px-40 flex flex-col items-center h-screen'>
-      <span className="text-4xl xl:text-6xl font-bold --font-gradient">Flick Flares</span>
+      <span className="text-4xl xl:text-6xl font-bold --font-gradient">Reely Hot Takes</span>
       <p className='text-sm xl:text-lg mt-4 text-center px-12'>Enter a Letterboxd username to see that user's hottest takes!</p>
       <div className="flex flex-col">
         <div className="flex px-8 pt-8 pb-4 gap-2 xl:gap-4 flex-col xl:flex-row">
@@ -105,14 +105,15 @@ function App() {
           )}
         </div>
       </div>
-      <p className='pt-2 pb-6 px-12 text-sm text-center xl:px-40 xl:text-center xl:text-md'>Hotness ratings are calculated by taking a user's letterboxd rating and comparing it against the average user score on <a href="https://www.themoviedb.org/?language=en-US" className="text-red-500">The Movie Database</a> for more accurate results. Movies are slightly weighted by popularity, i.e. a large rating difference of a popular movie will have a higher hotness rating than the same rating difference on a lesser-known movie.</p>
+      <p className='pt-2 pb-2 px-12 text-sm text-center xl:px-40 xl:text-center xl:text-md'>Hotness ratings are calculated by taking a user's letterboxd rating and comparing it against the average user score on <a href="https://www.themoviedb.org/?language=en-US" className="text-red-500 font-bold">The Movie Database</a> for more accurate results. Movies are slightly weighted by popularity, i.e. a large rating difference of a popular movie will have a higher hotness rating than the same rating difference on a lesser-known movie.</p>
+      <p className="text-sm mb-4"><strong className='text-red-500'>Note</strong>: the gathering process may take up to a few minutes if it is the first user request or the user has a lot of movies rated.</p>
     {isError && (
       <div className="flex items-center justify-center h-full mb-10">
         <p className="text-2xl font-bold">User not found. Please enter a valid Letterboxd user.</p>
       </div>
       )}
       {resultsShown && (
-        <div className={`flex flex-col gap-6 py-8 px-4 xl:px-12 xl:overflow-auto rounded-xl h-auto xl:h-[400px] 2xl:[800px] 2xl:text-4xl border border-gray-300`}>
+        <div className={`flex flex-col gap-6 py-8 px-4 xl:px-12 xl:overflow-auto rounded-xl h-auto xl:h-full border border-gray-300`}>
           {movies.map((movie: { title: string, user_rating: number, average: number, votes: number, hotness: number, poster: number, year: number, overview: string, genres: Array<string> }) => (
             <div key={movie.title} className="flex flex-col xl:flex-row border border-black rounded-3xl gap-3 xl:gap-6 p-4 xl:h-[216px] text-sm">
               {screenWidth && screenWidth <= 1280 && (
