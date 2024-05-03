@@ -103,7 +103,7 @@ function App() {
         <p className='text-sm xl:text-lg mt-4 text-center px-12 '>Enter a <a href="https://letterboxd.com/" target="_blank" className="text-red-500 font-bold">Letterboxd</a> username to see that user's hottest takes!</p>
         <div className="flex flex-col">
           <div className="flex px-8 pt-8 pb-4 gap-2 xl:gap-4 flex-col xl:flex-row">
-            <input type="text" className="border border-inputborder px-3 rounded-lg py-2 dark:border-darkinputborder dark:bg-transparent" placeholder='Letterboxd Username' onChange={e => setUsername(e.target.value)}/>
+            <input type="text" className={`border border-inputborder px-3 rounded-lg py-2 ${isDarkMode && 'border-darkinputborder bg-transparent'}`} placeholder='Letterboxd Username' onChange={e => setUsername(e.target.value)}/>
             <button onClick={() => !isClicked && getMovies()} className="--fire-gradient rounded-lg px-4 py-2 text-white font-bold">Get Hot Takes</button>
           </div>
           <div>
@@ -131,7 +131,7 @@ function App() {
                     </div>
                     <div className='flex w-full'>
                     <div className="flex flex-col w-full px-2 xl:px-12 justify-between">
-                      <div className="flex gap-3 xl:gap-0 xl:justify-between items-center dark:text-white">
+                      <div className={`flex gap-3 xl:gap-0 xl:justify-between items-center ${isDarkMode && 'text-white'}`}>
                         <a href={`https://letterboxd.com/film/${formatTitle(movie.title)}`} target='blank'>
                           <h2 className='text-md xl:text-xl'><b>{movie.title}</b></h2>
                         </a>
