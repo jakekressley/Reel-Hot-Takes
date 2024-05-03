@@ -1,9 +1,9 @@
 import './App.css'
 import { useState } from 'react'
-//import { useEffect } from 'react'
 import axios from 'axios'
 import LoadingBar from './components/LoadingBar'
 import { useWindowSize } from "@uidotdev/usehooks";
+import { DarkModeSwitch } from 'react-toggle-dark-mode';
 
 
 
@@ -17,17 +17,13 @@ function App() {
   const [isError, setIsError] = useState(false);
   const [displayCount, setDisplayCount] = useState(10);
   const [movieTotal, setMovieTotal] = useState(0);
-  //const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [isDarkMode, setDarkMode] = useState(false);
 
   const screenWidth = useWindowSize().width;
 
-  // useEffect(() => {
-  //   if (window.innerWidth < 1280) {
-  //     setIsSmallScreen(true)
-  //   } else {
-  //     setIsSmallScreen(false)
-  //   }
-  // })
+  const toggleDarkMode = (checked: boolean) => {
+    setDarkMode(checked);
+  }
 
   function getMovies() {
     setIsLoading(true)
@@ -91,9 +87,19 @@ function App() {
   }
 
   return (
-    <div className="h-screen dark:bg-darkbackground">
-      <div className='pt-10 px-4 xl:pt-8 xl:pb-12 xl:px-40 flex flex-col items-center h-auto dark:bg-darkbackground dark:text-darkcolor'>
+    <div className={`h-screen ${isDarkMode && 'bg-darkbackground'}`}>
+      <div className={`pt-10 px-4 xl:pt-8 xl:pb-12 xl:px-40 flex flex-col items-center h-auto ${isDarkMode && 'bg-darkbackground text-darkcolor'}`}>
         <span className="text-4xl xl:text-6xl font-bold --font-gradient">Reel Hot Takes</span>
+        <div className="absolute top-8 right-10 xl:right-20">
+          <DarkModeSwitch
+            style={{ marginBottom: '2rem' }}
+            checked={isDarkMode}
+            onChange={toggleDarkMode}
+            size={40}
+            sunColor={'#f7c923'}
+            moonColor={'#f7c923'}
+          />
+        </div>
         <p className='text-sm xl:text-lg mt-4 text-center px-12 '>Enter a <a href="https://letterboxd.com/" target="_blank" className="text-red-500 font-bold">Letterboxd</a> username to see that user's hottest takes!</p>
         <div className="flex flex-col">
           <div className="flex px-8 pt-8 pb-4 gap-2 xl:gap-4 flex-col xl:flex-row">
@@ -118,7 +124,7 @@ function App() {
         {resultsShown && (
           <div className={`flex flex-col gap-6 py-8 px-4 xl:px-12 xl:overflow-auto rounded-xl h-auto xl:h-full border border-gray-300 items-center`}>
             {movies.slice(0, displayCount).map((movie: { title: string, user_rating: number, average: number, votes: number, hotness: number, poster: number, year: number, overview: string, genres: Array<string> }) => (
-              <div key={movie.title} className="flex flex-col xl:flex-row border border-black dark:border-darkinputborder rounded-3xl gap-3 xl:gap-6 p-4 xl:h-[216px] text-sm">
+              <div key={movie.title} className={`flex flex-col xl:flex-row border border-black ${isDarkMode && 'border-darkinputborder'} rounded-3xl gap-3 xl:gap-6 p-4 xl:h-[216px] text-sm`}>
                 {screenWidth && screenWidth <= 1280 && (
                   <>
                     <div className="flex flex-col xl:flex-row items-center w-full xl:w-auto gap-6 justify-center xl:justify-normal">
