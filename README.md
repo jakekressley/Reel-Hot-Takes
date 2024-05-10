@@ -1,7 +1,7 @@
 # 🎥Reel Hot Takes🔥
 
 ## Overview
-Welcome to Reel Hot Takes! This web application allows users to retrieve the hottest takes from any [Letterboxd](https://letterboxd.com/) account they want! By simply entering a Letterboxd username, users can access a curated list of their most controversial based on a "hotness" algorithm. This app gathers Letterboxd data via [The Reel Hot Takes API](https://github.com/jakekressley/Reel-Hot-Takes-API)
+Welcome to Reel Hot Takes! This web application allows users to retrieve the hottest takes from any [Letterboxd](https://letterboxd.com/) account they want! By simply entering a Letterboxd username, users can access a curated list of their most controversial based on a "hotness" algorithm. This app gathers Letterboxd data via [The Reel Hot Takes API](https://github.com/jakekressley/Reel-Hot-Takes-API) (also developed by me).
 
 ## Features
 Letterboxd Integration: Connects seamlessly with The Movie Database API, IMDB scores, and Letterboxd ratings to fetch user data.
