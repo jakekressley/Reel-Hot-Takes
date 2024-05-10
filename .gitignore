@@ -24,3 +24,11 @@ dist-ssr
 *.sw?
 
 .env
+.gitmodules
+package-lock.json
+postcss.config.json
+tailwind.config.js
+.eslintrc.cjs
+tsconfig.json
+tsconfig.node.json
+vite.config.ts
