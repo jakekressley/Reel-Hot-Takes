@@ -1,30 +1,24 @@
-# React + TypeScript + Vite
+# 🎥Reel Hot Takes🔥
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+Welcome to Reel Hot Takes! This web application allows users to retrieve the hottest takes from any [Letterboxd](https://letterboxd.com/) account they want! By simply entering a Letterboxd username, users can access a curated list of their most controversial based on a "hotness" algorithm. This app gathers Letterboxd data via [The Reel Hot Takes API](https://github.com/jakekressley/Reel-Hot-Takes-API)
 
-Currently, two official plugins are available:
+## Features
+Letterboxd Integration: Connects seamlessly with The Movie Database API, IMDB scores, and Letterboxd ratings to fetch user data.
+Hottest Takes: Provides users with a list of their most polarizing or highly rated movie reviews.
+User-friendly Interface: Simple and intuitive design for easy navigation and use.
+Dark Theme: user's can choose between a light and dark theme.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Tech Stack
+- React
+- TypeScript
+- NPM Package Manager
+    - react-toggle-dark-mode
+- MongoDB
+- TailwindCSS
+- BeautifulSoup
+- Python
+  - FastAPI
+ 
+#
+🚀 Check it out here: www.reelhottakes.xyz
