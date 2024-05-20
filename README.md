@@ -21,4 +21,4 @@ Dark Theme: user's can choose between a light and dark theme.
   - FastAPI
  
 #
-🚀 Check it out here: www.reelhottakes.xyz
+🚀 Check it out [Here](https://flick-flares.onrender.com/)!
