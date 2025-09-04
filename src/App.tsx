@@ -4,6 +4,7 @@ import LoadingBar from "./components/LoadingBar";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import MovieItem from "./components/MovieItem";
 
+
 function App() {
   const [movies, setMovies] = useState([]);
   const [username, setUsername] = useState("");
