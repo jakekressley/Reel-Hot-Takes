@@ -1,27 +1,44 @@
-# 🎥Reel Hot Takes🔥
+# 🎥 Reel Hot Takes 🔥  
 
-## Overview
-Welcome to Reel Hot Takes! This web application allows users to retrieve the hottest takes from any [Letterboxd](https://letterboxd.com/) account they want! By simply entering a Letterboxd username, users can access a curated list of their most controversial based on a "hotness" algorithm. This app gathers Letterboxd data via [The Reel Hot Takes API](https://github.com/jakekressley/Reel-Hot-Takes-API) (also developed by me).
+👉 **Live now at [reelhottakes.xyz](https://reelhottakes.xyz/)**  
 
-![Demo](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdzgyaHhwc3AxeXV4Nmh6ZjlhZWRlMjNrbmh6NzJndmNoZnJwM3F3eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KBUkyopLSLPKNQ7uqS/giphy.gif)
+## Overview  
+Welcome to **Reel Hot Takes**! This web app uncovers the *spiciest* takes from any [Letterboxd](https://letterboxd.com/) account. Enter a username, and the app generates a ranked list of their most controversial ratings using a custom **“hotness” algorithm**.  
 
-## Features
-Letterboxd Integration: Connects seamlessly with The Movie Database API, IMDB scores, and Letterboxd ratings to fetch user data.
-Hottest Takes: Provides users with a list of their most polarizing or highly rated movie reviews.
-User-friendly Interface: Simple and intuitive design for easy navigation and use.
-Dark Theme: user's can choose between a light and dark theme.
+Data is pulled from Letterboxd and compared against **IMDb global averages** to determine how “hot” or controversial a user’s ratings are. The backend is powered by the [Reel Hot Takes API](https://github.com/jakekressley/Reel-Hot-Takes-API), which I also developed.  
 
-## Tech Stack
-- React
-- TypeScript
-- NPM Package Manager
-    - react-toggle-dark-mode
-- MongoDB
-- TailwindCSS
-- BeautifulSoup
-- Python
-  - FastAPI
- 
-#
-🚀 Check it out [Here](https://reelhottakes.xyz/) and feel free to try out my username (itsjake77) if you don't have an account!! \
-**Note**: Since I am using the free version of Render, the app may take a couple of minutes when getting your first username.
+![Demo](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdzgyaHhwc3AxeXV4Nmh6ZjlhZWRlMjNrbmh6NzJndmNoZnJwM3F3eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KBUkyopLSLPKNQ7uqS/giphy.gif)  
+
+---
+
+## ✨ Features  
+- **Letterboxd Integration** – Fetches ratings and reviews for any user.  
+- **Hotness Algorithm** – Compares user ratings against IMDb averages, with popular movies weighted more heavily.  
+- **Responsive UI** – Clean, intuitive interface for smooth user experience.  
+- **Dark Mode** – Built-in option to toggle between light and dark themes.  
+
+---
+
+## 🛠️ Tech Stack  
+
+**Frontend**  
+- React + TypeScript  
+- TailwindCSS  
+
+**Backend**  
+- Python (FastAPI)  
+- BeautifulSoup (scraping)  
+- IMDb averages for scoring  
+- MongoDB  
+
+**Deployment**  
+- **Docker** for containerization  
+- **Google Cloud Artifact Registry**  
+- **Google Cloud Run**  
+
+---
+
+## 🚀 Try It Out  
+👉 Live site: [reelhottakes.xyz](https://reelhottakes.xyz/)  
+
+You can test it with my Letterboxd username: **itsjake77**.  
