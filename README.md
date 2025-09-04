@@ -1,4 +1,3 @@
-# Reel Hot Takes is currently down. (I am fixing a bug with a new version of Render)
 # 🎥Reel Hot Takes🔥
 
 ## Overview
