@@ -1,6 +1,5 @@
 import "./App.css";
 import { useState } from "react";
-import axios from "axios";
 import LoadingBar from "./components/LoadingBar";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import MovieItem from "./components/MovieItem";
@@ -21,7 +20,8 @@ function App() {
     setDarkMode(checked);
   };
 
-  function getMovies() {
+  const API_URL = "https://reel-hot-takes-843767877817.us-east4.run.app"
+  async function getMovies() {
     setIsLoading(true);
     setIsClicked(true);
     setIsError(false);
@@ -31,26 +31,31 @@ function App() {
       );
     }, 200);
 
-    axios
-      .get(`https://cinescout.onrender.com/user/${username}`)
-      .then((response) => {
-        setMovies(response.data);
-        clearInterval(intervalId);
-        setProgress(0);
-        setIsLoading(false);
-        setIsClicked(false);
-        setResultsShown(true);
-        setMovieTotal(response.data.length);
-      })
-      .catch((error) => {
-        console.error(error);
-        console.log("error caught");
-        clearInterval(intervalId);
-        setProgress(0);
-        setIsLoading(false);
-        setIsClicked(false);
-        setIsError(true);
+    try {
+      const response = await fetch(`${API_URL}/user_ratings/${username}`, {
+        method: 'GET',
       });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+
+      setMovies(data.movies);
+      clearInterval(intervalId);
+      setProgress(0);
+      setIsLoading(false);
+      setIsClicked(false);
+      setResultsShown(true);
+      setMovieTotal(data.movies.length);
+    } catch (error) {
+      console.error(error);
+      console.log("error caught");
+      clearInterval(intervalId);
+      setProgress(0);
+      setIsLoading(false);
+      setIsClicked(false);
+      setIsError(true);
+    }
   }
 
 
@@ -142,31 +147,30 @@ function App() {
           >
             {movies
               .slice(0, displayCount)
-              .map(
-                (movie: {
-                  title: string;
-                  user_rating: number;
-                  average: number;
-                  votes: number;
-                  hotness: number;
-                  poster: number;
-                  year: number;
-                  overview: string;
-                  genres: Array<string>;
-                }) => (
-                  <MovieItem
-                    title={movie.title}
-                    userRating={movie.user_rating}
-                    average={movie.average}
-                    hotness={movie.hotness}
-                    poster={movie.poster}
-                    year={movie.year}
-                    overview={movie.overview}
-                    genres={movie.genres}
-                    isDarkMode={isDarkMode}
-                  />
-                )
-              )}
+              .map((movie: any) => (
+                <MovieItem
+                  title={movie.title}
+                  userRating={movie.user_rating}
+                  average={movie.average}
+                  hotness={movie.hotness}
+                  poster={movie.poster}
+                  year={movie.year}
+                  overview={movie.overview}
+                  genres={movie.genres}
+                  link={movie.link}
+                  imdbId={movie.imdb_id}
+                  type={movie.type}
+                  votes={movie.votes}
+                  directors={movie.directors}
+                  writers={movie.writers}
+                  stars={movie.stars}
+                  originCountries={movie.originCountries}
+                  spokenLanguages={movie.spokenLanguages}
+                  interests={movie.interests}
+                  runtimeSeconds={movie.runtimeSeconds}
+                  isDarkMode={isDarkMode}
+                />
+              ))}
             {displayCount < movieTotal && (
               <button
                 className="text-xs --fire-gradient rounded-full px-2 py-1 xl:px-4 xl:py-2 mx-1 text-white font-bold w-24 h-10"

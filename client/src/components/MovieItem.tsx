@@ -70,7 +70,7 @@ const MovieItem: React.FC<MovieItemProps> = ({ title, userRating, average, hotne
               <div className="h-[60%] xl:overflow-y-auto flex items-center mb-3 --overview-text gap-6">
                 <p>{overview}</p>
                 <img
-                  src={`https://image.tmdb.org/t/p/original/${poster}`}
+                  src={`${poster}`}
                   alt={`${title} poster`}
                   className="xl:block w-auto h-[144px] xl:h-full"
                 />
@@ -135,7 +135,7 @@ const MovieItem: React.FC<MovieItemProps> = ({ title, userRating, average, hotne
               </p>
             </div>
             <img
-              src={`https://image.tmdb.org/t/p/original/${poster}`}
+              src={`${poster}`}
               alt={`${title} poster`}
               className="xl:block w-auto h-[100px] xl:h-full"
             />
