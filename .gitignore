@@ -26,8 +26,4 @@ dist-ssr
 .env
 .gitmodules
 package-lock.json
-postcss.config.js
-tailwind.config.js
 .eslintrc.cjs
-tsconfig.node.json
-vite.config.ts
