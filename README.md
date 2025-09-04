@@ -1,4 +1,3 @@
-# Reel Hot Takes is currently down. (I am fixing a bug with a new version of Render)
 # 🎥Reel Hot Takes🔥
 
 ## Overview
@@ -24,5 +23,5 @@ Dark Theme: user's can choose between a light and dark theme.
   - FastAPI
  
 #
-🚀 Check it out [Here](https://flick-flares.onrender.com/) and feel free to try out my username (itsjake77) if you don't have an account!! \
+🚀 Check it out [Here](https://reelhottakes.xyz/) and feel free to try out my username (itsjake77) if you don't have an account!! \
 **Note**: Since I am using the free version of Render, the app may take a couple of minutes when getting your first username.
