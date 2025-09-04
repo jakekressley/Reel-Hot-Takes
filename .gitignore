@@ -29,6 +29,5 @@ package-lock.json
 postcss.config.js
 tailwind.config.js
 .eslintrc.cjs
-tsconfig.json
 tsconfig.node.json
 vite.config.ts
