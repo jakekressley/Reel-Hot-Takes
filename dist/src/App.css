@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+:root {
+    --background: #ffffff;
+    --color: #000000;
+    --input-border: #000000;
+
+    --dark-background: #14181c;
+    --dark-color: rgb(186, 197, 207);
+    --dark-input-border: #9ab;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+}
+
+.--fire-gradient {
+    background: rgb(253,29,29);
+    background: linear-gradient(315deg, rgba(253,29,29,1) 27%, rgba(252,176,69,1) 100%);
+}
+
+.--font-gradient {
+    background: rgb(253,29,29);
+    background: linear-gradient(180deg, rgba(253,29,29,1) 20%, rgba(252,176,69,1) 100%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: "Bebas Neue", sans-serif;
+}
+
+.--overview-text {
+    font-size: 0.8rem;
+    line-height: 1.2rem;
+}
