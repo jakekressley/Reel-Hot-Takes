@@ -27,9 +27,8 @@ Data is pulled from Letterboxd and compared against **IMDb global averages** to 
 
 **Backend**  
 - Python (FastAPI)  
-- BeautifulSoup (scraping)  
-- IMDb averages for scoring  
-- MongoDB  
+- BeautifulSoup (web scraping)  
+- Mongo Database of ~50,00 movies
 
 **Deployment**  
 - **Docker** for containerization  
