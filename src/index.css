@@ -58,8 +58,4 @@
   }
 }
 
-@layer base {
-  /* Use Tailwind tokens instead of hard borders everywhere */
-  * { @apply border-border; }
-  body { @apply bg-background text-foreground; }
-}
+
