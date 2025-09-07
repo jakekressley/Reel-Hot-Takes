@@ -3,7 +3,7 @@ type Rec = { title:string; year?:number; poster?:string; genres?:string[]; score
 export function RecCard({ r, onSeen }: { r: Rec; onSeen?: () => void }) {
   return (
     <div className="rounded-2xl shadow p-3 w-40">
-      <img src={r.poster || "/placeholder.png"} alt="" className="w-full aspect-[2/3] object-cover rounded-xl mb-2" loading="lazy" />
+      <img src={r.poster || "/placeholder.png"} alt="" className="w-full aspect-2/3 object-cover rounded-xl mb-2" loading="lazy" />
       <div className="text-sm font-medium line-clamp-2">{r.title}{r.year ? ` (${r.year})` : ""}</div>
       <div className="text-xs opacity-70">{r.genres?.slice(0,2).join(" • ")}</div>
       {r.because && <div className="text-[11px] mt-1 italic opacity-70">Because you liked {r.because}</div>}

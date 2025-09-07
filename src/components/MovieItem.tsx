@@ -44,7 +44,7 @@ export default function MovieItem({
 
   return (
     <article
-      className={`grid grid-cols-1 xl:grid-cols-[auto,1fr] gap-4 xl:gap-6 border rounded-3xl p-4 xl:p-6 ${
+      className={`grid grid-cols-1 xl:grid-cols-[auto_1fr] gap-4 xl:gap-6 border rounded-3xl p-4 xl:p-6 ${
         isDarkMode ? "border-darkinputborder text-white" : "border-black"
       }`}
     >
@@ -55,7 +55,7 @@ export default function MovieItem({
             src={poster || "/placeholder-poster.png"}
             alt={`${title} poster`}
             loading="lazy"
-            className="w-full aspect-[2/3] object-cover rounded-2xl"
+            className="w-full aspect-2/3 object-cover rounded-2xl"
             onError={(e) => {
               (e.currentTarget as HTMLImageElement).src = "/placeholder-poster.png";
             }}

@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",
+    "@tailwindcss/postcss": "^4.1.13",
     "@tailwindcss/vite": "^4.1.13",
     "@uidotdev/usehooks": "^2.4.1",
     "axios": "^1.6.7",
@@ -37,7 +38,7 @@
     "eslint": "^8.56.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
-    "postcss": "^8.4.35",
+    "postcss": "^8.5.6",
     "tailwindcss": "^4.1.13",
     "typescript": "^5.2.2",
     "vite": "^5.1.4"
