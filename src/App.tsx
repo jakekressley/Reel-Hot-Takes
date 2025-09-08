@@ -22,7 +22,7 @@ export default function App() {
   const [isError, setIsError] = useState<string | null>(null);
   const [displayCount, setDisplayCount] = useState(12);
   const [movieTotal, setMovieTotal] = useState(0);
-  const [sortKey, setSortKey] = useState<"hot" | "avg" | "year">("hot"); 
+  let sortKey = "hot"; // "hot" | "avg" | "year"
 
   const sortedMovies = useMemo(() => {
     const arr = [...movies];
