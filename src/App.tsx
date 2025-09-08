@@ -80,7 +80,7 @@ export default function App() {
         </h1>
 
         <p className="mt-3 text-sm xl:text-base text-white/80 text-center max-w-2xl">
-          Drop a <a className="text-[#F27405]" href="https://letterboxd.com/" target="blank">Letterboxd</a> username to see their hottest takes—and what they should watch next.
+          Enter a <a className="text-[#F27405]" href="https://letterboxd.com/" target="blank">Letterboxd</a> username to see the users hottest takes and what they should watch next.
         </p>
 
         <div className="w-full xl:max-w-3xl mt-5">
