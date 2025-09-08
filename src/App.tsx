@@ -46,17 +46,16 @@ export default function App() {
     history.replaceState(null, "", `?${qs.toString()}`);
 
     try {
-      const [ratingsRes, recsRes] = await Promise.all([
-        fetch(`${API_URL}/users/${username}/ratings`),
-        fetch(`${API_URL}/users/${username}/recommendations`),
-      ]);
+      // First fetch ratings
+      const ratingsRes = await fetch(`${API_URL}/users/${username}/ratings`);
       if (!ratingsRes.ok) throw new Error("ratings fetch failed");
-
       const ratingsData = await ratingsRes.json();
-      const recsData = recsRes.ok ? await recsRes.json() : { recommendations: [] };
-
       setMovies(ratingsData.movies || []);
       setMovieTotal((ratingsData.movies || []).length);
+
+      // Then fetch recommendations (after ratings are set)
+      const recsRes = await fetch(`${API_URL}/users/${username}/recommendations`);
+      const recsData = recsRes.ok ? await recsRes.json() : { recommendations: [] };
       setRecs(recsData.recommendations || []);
       setResultsShown(true);
     } catch (e) {

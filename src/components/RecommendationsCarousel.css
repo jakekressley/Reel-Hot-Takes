@@ -1,3 +1,4 @@
+
 .swiper-button-next, .swiper-button-prev {
   top: 50%;
   transform: translateY(-50%);
@@ -8,6 +9,8 @@
 }
 
 .swiper-button-next {
-  margin-left: 12px;
+  z-index: 100;
+}
+.swiper-button-prev {
   z-index: 100;
 }
