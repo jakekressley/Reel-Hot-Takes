@@ -16,9 +16,8 @@ type MovieItemProps = {
     runtimeSeconds: number;
     poster: string;
     year: number;
-    overview: string;
+    plot: string;
     genres: string[];
-    isDarkMode: boolean;
 };
 
 export default MovieItemProps;

@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",
+    "@splidejs/splide": "^4.1.4",
     "@tailwindcss/postcss": "^4.1.13",
     "@tailwindcss/vite": "^4.1.13",
     "@uidotdev/usehooks": "^2.4.1",
@@ -22,9 +23,11 @@
     "lucide-react": "^0.542.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-spinners": "^0.17.0",
     "react-toggle-dark-mode": "^1.1.1",
     "react-top-loading-bar": "^2.3.1",
     "styled-components": "^6.1.8",
+    "swiper": "^11.2.10",
     "tailwind-merge": "^3.3.1",
     "tailwindcss-animate": "^1.0.7"
   },
