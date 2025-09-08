@@ -25,7 +25,6 @@ export default function MovieTile({
 
   return (
     <article className="group relative overflow-hidden rounded-2xl bg-[hsl(var(--surface))] border border-[hsl(var(--border))]">
-      {/* Poster */}
       <a href={href} target="_blank" rel="noopener noreferrer" className="block relative">
         <img
           src={poster || "/placeholder-poster.png"}
@@ -36,30 +35,28 @@ export default function MovieTile({
             (e.currentTarget as HTMLImageElement).src = "/placeholder-poster.png";
           }}
         />
-        {/* Hotness ring over poster (bottom-right) */}
         <div className="absolute right-3 bottom-3 z-20">
           <HotRing value={hot} size={40} />
         </div>
       </a>
 
-      {/* Footer: title fixed at top; ratings + genres pinned to bottom */}
-      <div className="px-3 py-3 text-white">
-        <div className="grid grid-rows-[auto,1fr,auto,auto] min-h-[132px]">
-          {/* Row 1: Title (L) / Year (R) */}
-          <div className="flex items-start justify-between gap-3">
-            <h3 className="text-base sm:text-lg font-semibold leading-tight line-clamp-3">
-              {title}
-            </h3>
-            {year ? (
-              <time className="text-xs sm:text-sm text-white/80 shrink-0">{year}</time>
-            ) : null}
-          </div>
-
-          {/* Row 2: Flexible spacer */}
-          <div />
-
-          {/* Row 3: User vs Average (fixed position from bottom) */}
-          <div className="text-sm">
+  <div className="px-3 pb-7 pt-5 text-white flex flex-col justify-between" style={{ minHeight: '155px', height: '155px', position: 'relative' }}>
+        <div className="relative" style={{ minHeight: '3.6em' }}>
+          <h3
+            className="text-base sm:text-lg font-semibold leading-tight overflow-hidden [display:-webkit-box] [-webkit-line-clamp:3] [-webkit-box-orient:vertical] w-4/5"
+            title={title}
+            style={{ minHeight: '3.6em' }}
+          >
+            {title}
+          </h3>
+          {year ? (
+            <time className="absolute top-0 right-0 text-xs sm:text-sm text-white/80">
+              {year}
+            </time>
+          ) : null}
+        </div>
+        <div style={{ position: 'absolute', left: 12, right: 12, bottom: 4 }}>
+          <div className="text-sm leading-[1.25rem] mb-3">
             <span className="opacity-80">User</span>
             <span className="mx-1">:</span>
             <span className="font-semibold">
@@ -70,29 +67,20 @@ export default function MovieTile({
             <span className="mx-1">:</span>
             <span className="font-semibold">{fmtAvg(average)}</span>
           </div>
-
-          {/* Row 4: Genres (pills) — single line, fixed height */}
           {Array.isArray(genres) && genres.length > 0 ? (
-            <div className="mt-2 h-6 flex flex-nowrap gap-1.5 overflow-hidden">
+            <div className="h-6 flex flex-nowrap items-center gap-1.5 overflow-hidden pb-3">
               {genres.slice(0, 3).map((g) => (
                 <span
                   key={g}
                   title={g}
-                  className="
-                    inline-flex items-center justify-center
-                    h-6 px-2.5 rounded-full
-                    bg-[#2C343F]/90 border border-[#556678]/50
-                    text-white/90 text-[11px] font-medium tracking-tight leading-none
-                    max-w-[7rem] truncate whitespace-nowrap
-                  "
+                  className="inline-flex items-center justify-center h-6 px-2.5 rounded-full bg-[#2C343F]/90 border border-[#556678]/50 text-white/90 text-[11px] font-medium tracking-tight leading-none max-w-[7rem] truncate whitespace-nowrap"
                 >
                   {g}
                 </span>
               ))}
             </div>
           ) : (
-            // keep the same vertical footprint even if no genres
-            <div className="mt-2 h-6" />
+            <div className="h-6" />
           )}
         </div>
       </div>

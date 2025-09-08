@@ -1,6 +1,5 @@
 import "./App.css";
 import { useEffect, useMemo, useState } from "react";
-import MovieItem from "./components/MovieItem";
 import { ClipLoader } from "react-spinners";
 import RecommendationsCarousel from "./components/RecommendationsCarousel";
 import MovieTile from "./components/MovieTile";
@@ -10,8 +9,8 @@ type Rec = {
   genres?: string[]; score?: number; average?: number; votes?: number; because?: string;
 };
 
-// const API_URL = "https://reel-hot-takes-843767877817.us-east4.run.app";
-const API_URL = "http://127.0.0.1:8000";
+const API_URL = "https://reel-hot-takes-843767877817.us-east4.run.app";
+//const API_URL = "http://127.0.0.1:8000";
 
 export default function App() {
   const [movies, setMovies] = useState<any[]>([]);
@@ -23,7 +22,7 @@ export default function App() {
   const [isError, setIsError] = useState<string | null>(null);
   const [displayCount, setDisplayCount] = useState(12);
   const [movieTotal, setMovieTotal] = useState(0);
-  const [sortKey, setSortKey] = useState<"hot" | "avg" | "year">("hot");
+  const [sortKey, setSortKey] = useState<"hot" | "avg" | "year">("hot"); 
 
   const sortedMovies = useMemo(() => {
     const arr = [...movies];
@@ -71,68 +70,69 @@ export default function App() {
   };
 
   useEffect(() => {
-    // Auto-run if URL has ?u=
     if (username && !resultsShown && !isLoading) onSubmit();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className="min-h-screen dark">
-      {/* Header */}
-      <header className="px-3 sm:px-4 lg:px-6">
-        <div className="mx-auto max-w-6xl pt-6">
-          <h1
-            className="text-3xl sm:text-5xl font-extrabold text-center
-                       bg-gradient-to-r from-[#00B021] via-[#556678] to-[#F27405]
-                       bg-clip-text text-transparent tracking-tight"
-          >
-            SCREEN SCOUT
-          </h1>
+    <div className="min-h-screen dark bg-[#14171C]">
+      <header className="relative pt-8 px-4 xl:pt-10 xl:px-40 flex flex-col items-center">
+        <h1 className="text-4xl xl:text-6xl font-extrabold tracking-tight text-white">
+          Screen Scout
+        </h1>
 
-          <p className="mt-1 text-center text-sm sm:text-base text-[hsl(var(--muted))]">
-            Enter a{" "}
-            <a className="text-[hsl(var(--primary))] font-bold" href="https://letterboxd.com/" target="_blank" rel="noreferrer">
-              Letterboxd
-            </a>{" "}
-            username to see their hottest takes—and what they should watch next.
-          </p>
+        <p className="mt-3 text-sm xl:text-base text-white/80 text-center max-w-2xl">
+          Drop a <a className="text-[#F27405]" href="https://letterboxd.com/" target="blank">Letterboxd</a> username to see their hottest takes—and what they should watch next.
+        </p>
 
-          {/* Controls (compact) */}
-          <div className="mx-auto max-w-5xl mt-3 card backdrop-blur">
+        <div className="w-full xl:max-w-3xl mt-5">
+          <div className="rounded-2xl border border-white/15 bg-[#14171C]/70 p-3">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
               <input
-                className="flex-1 bg-transparent border border-[hsl(var(--border))] rounded-lg px-3 py-2 outline-none"
-                placeholder="Letterboxd username"
+                type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value.trim())}
                 onKeyDown={(e) => e.key === "Enter" && onSubmit()}
+                placeholder="Enter Letterboxd username (e.g. itsjake77, pvandeputte)"
+                className="flex-1 bg-transparent border border-white/15 rounded-lg px-3 py-2
+                     text-white placeholder-white/50 outline-none"
               />
+
               <button
                 onClick={onSubmit}
                 disabled={!username || isClicked}
-                className={`btn-primary shrink-0 ${(!username || isClicked) ? "opacity-70 cursor-not-allowed" : ""}`}
+                className="relative inline-flex items-center justify-center
+                     rounded-lg px-4 py-2 font-semibold text-white bg-[#F27405] hover:bg-[#e65c00]
+                     disabled:opacity-50 disabled:cursor-not-allowed transition cursor-pointer"
+                aria-label="Show Hot Takes"
               >
-                {isLoading ? <span className="flex items-center gap-2"><ClipLoader size={16} color="#111" /> Fetching…</span> : "Get Hot Takes"}
+                {isClicked ? "Fetching…" : "Show Hot Takes"}
               </button>
+            </div>
 
-              <div className="sm:ml-auto flex items-center gap-2">
-                <span className="text-xs text-[hsl(var(--muted))]">Sort</span>
-                <select
-                  value={sortKey}
-                  onChange={(e) => setSortKey(e.target.value as any)}
-                  className="bg-transparent border border-[hsl(var(--border))] rounded-lg text-sm px-3 py-2"
+            <div className="mt-3 flex flex-wrap gap-2 items-center">
+              <span className="text-xs text-white/60">No username? Try:</span>
+              {["itsjake77", "pvandeputte", "bubblebubble15", "elijahv22", "maryhoffman"].map((u) => (
+                <button
+                  key={u}
+                  type="button"
+                  onClick={() => { setUsername(u); onSubmit(); }}
+                  className="inline-flex items-center rounded-full h-7 px-3 text-[12px]
+                       bg-[#2C343F]/90 border border-[#556678]/50 text-white/90
+                       hover:bg-[#2C343F] transition whitespace-nowrap"
+                  aria-label={`Use sample username ${u}`}
                 >
-                  <option value="hot">Hotness</option>
-                  <option value="avg">Avg rating</option>
-                  <option value="year">Year</option>
-                </select>
-              </div>
+                  {u}
+                </button>
+              ))}
             </div>
           </div>
         </div>
+
+        <p className="mt-8 text-md text-white/60 text-center">
+          Hotness compares the user’s rating to the global average, lightly weighted by popularity.
+        </p>
       </header>
 
-      {/* Error */}
       {isError && (
         <div className="mx-auto max-w-6xl px-3 sm:px-4 lg:px-6 mt-3">
           <div className="rounded-xl bg-red-50/10 text-red-300 border border-red-500/30 px-4 py-3">
@@ -141,19 +141,20 @@ export default function App() {
         </div>
       )}
 
-      {/* Main */}
       <main className="mx-auto max-w-6xl px-3 sm:px-4 lg:px-6 pt-4 pb-10 space-y-8">
         {/* Hottest Takes */}
         {resultsShown && !isError && (
           <section>
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold">Hottest Takes</h2>
+              <h2 className="text-lg font-semibold"></h2>
               <span className="text-xs text-[hsl(var(--muted))]">{movieTotal} films rated</span>
             </div>
             <div className="divider my-2" />
+
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
               {sortedMovies.slice(0, displayCount).map((movie: any, i: number) => (
                 <MovieTile
+                  key={`${movie.title}-${i}`}
                   title={movie.title}
                   userRating={movie.user_rating}
                   average={movie.average}
@@ -177,14 +178,26 @@ export default function App() {
               ))}
             </div>
 
+            {displayCount < sortedMovies.length && (
+              <div className="mt-6 flex justify-center">
+                <button
+                  onClick={() => setDisplayCount(c => Math.min(c + 12, sortedMovies.length))}
+                  className="relative inline-flex items-center justify-center
+                 rounded-lg px-4 py-2 font-semibold text-white bg-[#F27405] hover:bg-[#e65c00] cursor-pointer"
+                >
+                  Show 12 more
+                </button>
+              </div>
+            )}
+
           </section>
         )}
 
-        {/* Recommendations (under Hottest Takes) */}
         {resultsShown && !isError && recs?.length > 0 && (
-          <section>
+          <section className="mt-16 text-white text-center">
+            <h2 className="text-lg font-semibold text-center">Recommended Movies for {username}</h2>
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold">Recommended for {username}</h2>
+              <h1></h1>
               <span className="text-xs text-[hsl(var(--muted))]">{recs.length} picks</span>
             </div>
             <div className="divider my-2" />
@@ -194,14 +207,12 @@ export default function App() {
           </section>
         )}
 
-        {/* Initial state */}
         {!resultsShown && !isLoading && !isError && (
           <section className="mx-auto max-w-5xl text-center text-[hsl(var(--muted))]">
             <div className="card py-8">Search a username to get started.</div>
           </section>
         )}
 
-        {/* Loading state (full page) */}
         {isLoading && (
           <section className="flex items-center justify-center py-12">
             <ClipLoader size={28} color="#F27405" />

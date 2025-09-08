@@ -1,8 +1,9 @@
-// components/Recommendations.tsx
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+
+import "./RecommendationsCarousel.css";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
@@ -24,22 +25,23 @@ export default function RecommendationsCarousel({ recs }: { recs: Rec[] }) {
 
   return (
     <Swiper
-      modules={[Navigation, Pagination, Scrollbar, A11y]}
+  modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
       spaceBetween={20}
-      // responsive slides per view
+
       breakpoints={{
         0:   { slidesPerView: 2 },
         640: { slidesPerView: 3 },
-        1024:{ slidesPerView: 5 },
+        1024:{ slidesPerView: 4 },
       }}
       navigation
       pagination={{ clickable: true }}
       scrollbar={{ draggable: true }}
       loop={true}
       autoplay={{
-                delay: 300,
-                disableOnInteraction: true,
-            }}
+        delay: 3000,
+        disableOnInteraction: true,
+      }}
+      style={{ padding: "2.5rem",  }}
     >
       {recs.map((r, idx) => (
         <SwiperSlide key={`${r.title}-${r.year ?? "y"}-${idx}`}>
